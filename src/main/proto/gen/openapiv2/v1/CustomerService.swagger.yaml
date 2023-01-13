@@ -1,0 +1,62 @@
+swagger: "2.0"
+info:
+  title: v1/CustomerService.proto
+  version: version not set
+tags:
+  - name: CustomerService
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /customers:
+    post:
+      operationId: CustomerService_Customer
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/serviceCustomerResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/serviceCustomerRequest'
+      tags:
+        - CustomerService
+definitions:
+  protobufAny:
+    type: object
+    properties:
+      '@type':
+        type: string
+    additionalProperties: {}
+  rpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  serviceCustomerRequest:
+    type: object
+    properties:
+      id:
+        type: string
+  serviceCustomerResponse:
+    type: object
+    properties:
+      firstname:
+        type: string
+      lastname:
+        type: string
