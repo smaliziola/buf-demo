@@ -1,0 +1,30 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+option java_multiple_files = true;
+option java_package = "com.example.customer.service.grpc.v1";
+option java_outer_classname = "CustomerProto";
+option go_package = "github.com/example/path/gen;gen";
+
+package customer.service;
+
+service CustomerService {
+
+  rpc Customer (CustomerRequest) returns (CustomerResponse) {
+    option (google.api.http) = {
+      post: "/customers"
+      body: "*"
+    };
+  }
+
+}
+
+message CustomerRequest {
+  string id = 1;
+}
+
+message CustomerResponse {
+  string firstname = 1;
+  string lastname = 2;
+}
